@@ -1,0 +1,14 @@
+name: chatbot-backend
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - fastapi
+  - uvicorn
+  - pydantic
+  - python-dotenv
+  - pip:
+      - langchain-core
+      - langchain-ollama
