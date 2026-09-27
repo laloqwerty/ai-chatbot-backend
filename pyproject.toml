@@ -1,0 +1,17 @@
+[project]
+name = "chatbot-backend"
+version = "0.1.0"
+description = "FastAPI backend for a chatbot using LangChain and Ollama"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+dependencies = [
+    "fastapi",
+    "langchain-core",
+    "langchain-ollama",
+    "pydantic",
+    "python-dotenv",
+    "uvicorn",
+]
+
+[tool.uv]
+package = false

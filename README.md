@@ -4,9 +4,21 @@ FastAPI backend for a chatbot using LangChain and Ollama.
 
 ## Requirements
 
-- Conda
+- uv
 - Ollama installed locally
 - Git
+
+On Windows, install uv with either:
+
+```powershell
+winget install --id=astral-sh.uv -e
+```
+
+or:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
 
 ## 1) Clone the repository
 
@@ -15,11 +27,10 @@ git clone <your-repo-url>
 cd chatbot-backend
 ```
 
-## 2) Create the Conda environment
+## 2) Create the environment
 
 ```bash
-conda env create -f environment.yml
-conda activate chatbot-backend
+uv sync
 ```
 
 ## 3) Configure environment variables
@@ -46,7 +57,7 @@ ollama pull gemma4:e4b
 ## 5) Run the app
 
 ```bash
-uvicorn app.main:app --reload
+uv run uvicorn app.main:app --reload
 ```
 
 The API will be available at:
