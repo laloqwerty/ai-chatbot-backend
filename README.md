@@ -23,7 +23,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 ## 1) Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone <repo-url>
 cd chatbot-backend
 ```
 
