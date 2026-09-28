@@ -6,8 +6,19 @@ from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_ollama import ChatOllama
 
+from app.services.sql_chat_history import SqlChatHistory
+
 
 load_dotenv()
+
+def debug_step(x):
+    print("=== Prompt output (list of messages) ===")
+    for msg in x.messages:
+        print(f"  [{msg.type}] {msg.content}")
+    return x
+
+def get_session_history(session_id: str):
+    return SqlChatHistory(session_id)
 
 llm = ChatOllama(
     model=os.getenv("OLLAMA_MODEL", "gemma4:e4b"),
@@ -20,18 +31,14 @@ prompt = ChatPromptTemplate.from_messages([
     ("user", "{message}"),
 ])
 
-chain = prompt | llm
-histories = {}
+chain = prompt | debug_step | llm
 
-
-def get_session_history(session_id: str):
-    if session_id not in histories:
-        histories[session_id] = InMemoryChatMessageHistory()
-    return histories[session_id]
-
+def debug_input(x):
+    print("=== Input into chain (post-history-injection) ===", x)
+    return x
 
 chat_chain = RunnableWithMessageHistory(
-    chain,
+    debug_input | chain ,
     get_session_history,
     input_messages_key="message",
     history_messages_key="history",

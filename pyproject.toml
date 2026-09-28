@@ -10,6 +10,7 @@ dependencies = [
     "langchain-ollama",
     "pydantic",
     "python-dotenv",
+    "sqlalchemy>=2.1.1",
     "uvicorn",
 ]
 
