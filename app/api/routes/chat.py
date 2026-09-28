@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 
-from app.models.chat import ChatRequest
+from app.models.chat_request import ChatRequest
 from app.services.chat_service import chat_chain
 
 
