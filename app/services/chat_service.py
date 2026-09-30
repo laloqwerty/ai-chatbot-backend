@@ -1,15 +1,11 @@
-import os
-
-from dotenv import load_dotenv
 from langchain_core.chat_history import InMemoryChatMessageHistory
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_ollama import ChatOllama
 
+from app.core.config import settings
 from app.services.sql_chat_history import SqlChatHistory
 
-
-load_dotenv()
 
 def debug_step(x):
     print("=== Prompt output (list of messages) ===")
@@ -21,8 +17,8 @@ def get_session_history(session_id: str):
     return SqlChatHistory(session_id)
 
 llm = ChatOllama(
-    model=os.getenv("OLLAMA_MODEL", "gemma4:e4b"),
-    base_url=os.getenv("OLLAMA_BASE_URL", "http://localhost:11434"),
+    model=settings.ollama_model,
+    base_url=settings.ollama_base_url,
 )
 
 prompt = ChatPromptTemplate.from_messages([

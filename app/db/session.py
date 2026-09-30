@@ -1,8 +1,8 @@
 #engine + Session factory (reads DATABASE_URL)
 
-import os
 from sqlalchemy import create_engine
+from app.core.config import settings
 from app.db.models import Base
 
-engine = create_engine(os.getenv("DATABASE_URL", "sqlite:///chat.db"))
+engine = create_engine(settings.database_url)
 Base.metadata.create_all(engine)  # fine for now; swap for Alembic later
